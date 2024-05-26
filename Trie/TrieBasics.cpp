@@ -1,5 +1,7 @@
 // its also LeetCode- 208
-
+#include<iostream>
+#include<algorithm>
+using namespace std;
 class TrieNode{
     public:
         char val;
