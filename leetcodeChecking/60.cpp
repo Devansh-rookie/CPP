@@ -23,6 +23,9 @@ void getPermutation(int n, int k) {
     }
     string s = "";
     util(ans, nums, 0, k, s);
+    if(s.length() == 0){
+        s =ans[ans.size()-1];
+    }
     for (int i = 0; i < ans.size(); i++)
     {
         cout<< ans[i] <<endl;
