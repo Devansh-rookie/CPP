@@ -32,10 +32,14 @@ template <typename T>
 
 
 class graph{
+    // unordered_map<T, list<T>> adj;
 public:
     // adjacency list
     unordered_map<T, list<T>> adj; // int is the data type we are using otherwise just use the template type
     
+    // graph(){
+    //     self->adj = adj;
+    // }
     void addNode(T node1, T node2, bool direction){// node1 is connected to node2 by default 1->2 if directed graph else both are connected to each other obviously
         adj[node1].push_back(node2);
         if(direction == false){
@@ -54,11 +58,11 @@ public:
         }
         cout<< endl;
     }
-
+    unordered_map<T, bool> visited;// or use bool here
+    
     void undirectedBfs(T vertex){// bfs is to be started from this node
-        unordered_map<T, bool> visited;// or use bool here
-        queue<T> q;
         cout << endl;
+        queue<T> q;
         q.push(vertex);
         while(!q.empty()){
             T currVal = q.front();
@@ -84,6 +88,7 @@ int main()
     // e.g. 5 4 0 3 1 3 1 4 1 2
     // we need sorted way then use set instead and use insert instead of pushback thats all
     graph<int> g;
+    // unordered_map<int, bool> visited;
     int n,m;
     cout << "Give the number of nodes and edges: ";
     cin >> n >> m;
@@ -97,19 +102,29 @@ int main()
     g.printAdjList();
     // g.undirectedBfs(3);
     // g.undirectedBfs(0);
-    int nVertex;
-    cout << "number of vertex for BFS: ";
-    cin >> nVertex;
-    vector<int> arr(nVertex);
-    cout << "Give all the vertex: ";
-    int x;
-    // useful to print multiple components of the graph
-    for(int i=0;i < nVertex;i++){
-        cin >> x;
-        arr[i] = x;
-    }
-    for(auto vertex: arr){
-        g.undirectedBfs(vertex);
+
+    // int nVertex;
+    // cout << "number of vertex for BFS: ";
+    // cin >> nVertex;
+    // vector<int> arr(nVertex);
+    // cout << "Give all the vertex: ";
+    // int x;
+    // // useful to print multiple components of the graph
+    // for(int i=0;i < nVertex;i++){
+    //     cin >> x;
+    //     arr[i] = x;
+    // }
+    // for(auto vertex: arr){
+    //     g.undirectedBfs(vertex);
+    // }
+    int vertex;
+    cout << "What is the vertex: ";
+    cin >> vertex;
+    g.undirectedBfs(vertex);
+    for(auto i : g.adj){
+        if(g.visited[i.first] == false){
+            g.undirectedBfs(i.first);
+        }
     }
     return 0;
 }
