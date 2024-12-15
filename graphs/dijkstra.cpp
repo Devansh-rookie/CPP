@@ -3,6 +3,7 @@
 // bool mycomp(pair<int, int>a, pair<int, int>b) {
 //     return a.second > b.second;
 // }
+using namespace std;
 struct mycomp {
     constexpr bool operator()(
         pair<int, int> const& a,
