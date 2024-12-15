@@ -1,0 +1,29 @@
+
+def solve():
+    with open("subsonic_subway_input.txt", "r") as fobj, open("output.txt", "w") as outObj:
+        T = int(fobj.readline().strip())  
+        
+        for t in range(1, T+1):
+            N = int(fobj.readline().strip()) 
+            max_l_bound = 0.0
+            min_u_bound = float('inf')
+            
+            for i in range(1, N + 1):
+                Ai, Bi = map(int, fobj.readline().split()) 
+                
+                if Bi == 0:
+                    outObj.write(f"Case #{t}: -1\n") 
+                    break
+                else:
+                    lower_bound = i / Bi
+                    upper_bound = float('inf') if Ai == 0 else i / Ai
+                    
+                    max_l_bound = max(max_l_bound, lower_bound)
+                    min_u_bound = min(min_u_bound, upper_bound)
+            else:
+                if max_l_bound <= min_u_bound:
+                    outObj.write(f"Case #{t}: {max_l_bound:.6f}\n") 
+                else:
+                    outObj.write(f"Case #{t}: -1\n")
+
+solve()
